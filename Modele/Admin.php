@@ -12,13 +12,14 @@ class Admin extends Modele {
      * @return boolean Vrai si l'utilisateur existe, faux sinon
      */
     public function connecter($login, $mdp) {
-        $query = Parse\ParseUser::query();
+        //$user = Parse\ParseUser::logIn($login, $mdp);
+        //$username = $user->getUsername();
+        //if ($username == "admin") {
         if ($user = Parse\ParseUser::logIn($login, $mdp)) {
-            $this->requete->getSession()->setAttribut("idAdmin", $user->getObjectId());
-            $this->requete->getSession()->setAttribut("login", $user->get('username'));
             return true;
-        } else
+        } else {
             return false;
+        }
     }
 
     /**
@@ -29,7 +30,7 @@ class Admin extends Modele {
      * @return mixed L'utilisateur
      * @throws Exception Si aucun utilisateur ne correspond aux paramètres
      */
-    public function getAdmin($login, $mdp) {
+    public function getAdmin() {
         $user = Parse\ParseUser::getCurrentUser();
         return $user;
     }

@@ -5,7 +5,7 @@ require_once 'ControleurSecurise.php';
 require_once 'Modele/Tests.php';
 require_once 'Modele/MoodPairs.php';
 
-class ControleurTests extends ControleurPersonnalise {
+class ControleurTests extends ControleurSecurise {
 
     private $tests;
     private $moodPairs;

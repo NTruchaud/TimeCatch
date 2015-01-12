@@ -24,9 +24,11 @@ class ControleurConnexion extends Controleur {
             $login = $this->requete->getParametre("login");
             $mdp = $this->requete->getParametre("mdp");
             if ($this->admin->connecter($login, $mdp)) {
+                $admin = $this->admin->getAdmin();
+                $this->requete->getSession()->setAttribut("admin", $admin);
                 $this->rediriger("accueil");
             } else
-                $this->genererVue(array('msgErreur' => 'Login ou mot de passe incorrects'), "index");
+                $this->genererVue(array('msgErreur' => 'Login ou mot de passe incorrects'));
         } else
             throw new Exception("Action impossible : login ou mot de passe non défini");
     }
