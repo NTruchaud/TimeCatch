@@ -10,11 +10,8 @@ require_once 'Vue/_Commun/navigation.php';
     </head>
     <body>
         <div class="container">
-            <?php
-            /*if (isset($message))
-                echo $this->nettoyer($message);*/
-            ?>
-            <h2 class="text-center">Liste de vos tests d'étude</h2>
+            <h2 class="text-center">Liste de vos tests d'étude</h2><br/>
+            <a class="btn btn-info" title="Exporter" href="Tests/exportCSV" type="button">Exporter</a>
             <div class="table-responsive">
                 <table class="table table-hover table-condensed">
                     <thead>

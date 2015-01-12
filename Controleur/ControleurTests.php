@@ -69,7 +69,7 @@ class ControleurTests extends ControleurSecurise {
                 if ($this->requete->existeParametre($idMoodPair)) {
                     $checkbox = $this->requete->getParametre($idMoodPair);
                     if (isset($checkbox)) {
-                        $arrayMoods[$idMoodPair] =  $checkbox;
+                        $arrayMoods[$idMoodPair] = $checkbox;
                     }
                 }
             }
@@ -91,6 +91,45 @@ class ControleurTests extends ControleurSecurise {
             throw new Exception("La suppression n'a pas pu être effectuée.");
         }
         $this->genererVue(array("tests" => $tests, "message" => $message));
+    }
+
+    /*
+     * Tentative d'implémentation de l'export CSV
+     * Le problème étant que l'on va envoyer un tableau Parse, donc va savoir ce qu'il y a dedans, et donc ce qu'il va mette
+     * dans e fichier CSV.
+     * 
+     */
+    
+    public function exportCSV() {
+        $studies = $this->tests->getStudy();
+        $arrayStudies = array();
+        
+        foreach ($studies as $study) {
+            $arrayStudies[$study->getObjectId()] = array($study->getCreatedAt()->format('Y-m-d H:i:s'), strval($study->get("duree_1")), strval($study->get("duree_2")), 
+                strval($study->get("n_rep")));
+        }
+        $this->array_to_csv_download($arrayStudies, $filename = "export.csv", $delimiter = ",");
+    }
+    
+    public function array_to_csv_download($array, $filename = "export.csv", $delimiter = ";") {
+        // open raw memory as file so no temp files needed, you might run out of memory though
+        $f = fopen('php://output', 'w');
+        // loop over the input array
+        
+        foreach ($array as $line) {
+            // generate csv lines from the inner arrays
+            fputcsv($f, $line, $delimiter);
+        }
+        
+        
+        // rewrind the "file" with the csv lines
+        //fseek($f, 0);
+        // tell the browser it's going to be a csv file
+        header('Content-Type: application/csv');
+        // tell the browser we want to save it instead of displaying it
+        header('Content-Disposition: attachement; filename="' . $filename . '";');
+        // make php send the generated csv lines to the browser
+        fpassthru($f);
     }
 
 }
