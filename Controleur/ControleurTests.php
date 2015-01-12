@@ -74,8 +74,6 @@ class ControleurTests extends ControleurSecurise {
                 }
             }
 
-            var_dump($arrayMoods);
-
             $test = $this->tests->addStudy(intval($this->requete->getParametre('duree_1')), intval($this->requete->getParametre('duree_2')), intval($this->requete->getParametre('n_rep')), $dateTime, $arrayMoods);
         } else {
             $message = "Le test d'étude n'a pas pu être ajouté";

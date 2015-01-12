@@ -21,7 +21,7 @@ require 'Vue/_Commun/navigation.php';
             <div class="form-group">
                 <label class="col-sm-3 col-sm-offset-2 control-label">N_rep</label>
                 <div class="col-sm-5 col-md-4">
-                    <input name="n_rep" type="number" class="form-control" rows="2" required>
+                    <input name="n_rep" type="number" class="form-control" rows="2" value="24" required>
                 </div>
             </div>
             <div class="form-group">
@@ -31,18 +31,14 @@ require 'Vue/_Commun/navigation.php';
                 </div>
             </div>
 
-            <div>
-                <label class="col-sm-3 col-sm-offset-2 control-label">Mood Pairs</label> 
-                <br>
+            <div class="text-center">
+                <label class="col-sm-3 col-sm-offset-2 control-label">Mood Pairs</label><br/><br/>
                 <?php foreach ($moodPairs as $moodPair): ?>
-                    <div class="col-sm-5 col-md-4">
-                        <input type='checkbox' id="<?= $moodPair->getObjectId() ?>" name='<?= $moodPair->getObjectId() ?>' value='<?= $moodPair->getObjectId() ?>'  > 
-                        <?= $moodPair->get("moodPositive_fr") . "-" . $moodPair->get("moodNegative_fr") ?>
-                    </div>
+                <input type='checkbox' id="<?= $moodPair->getObjectId() ?>" name='<?= $moodPair->getObjectId() ?>' value='<?= $moodPair->getObjectId() ?>' > 
+                        <?= $moodPair->get("moodPositive_fr") . "-" . $moodPair->get("moodNegative_fr") ?><br/>
                 <?php endforeach; ?>
-
             </div>
-
+            <br/>
             <div class="form-group">
                 <div class="col-sm-3 col-sm-offset-5">
                     <button type="submit" class="btn btn-default btn-primary"><span class="glyphicon glyphicon-plus"></span> Ajouter</button>
