@@ -23,16 +23,24 @@ require_once 'Vue/_Commun/navigation.php';
                             <th>Intervalle court</th>
                             <th>Intervalle long</th>
                             <th>Nombre de répétition de la procédure</th>
+                            <th>MoodPairs</th>
                             <th></th> <!-- Colonne des boutons d'action -->
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($tests as $test): ?>
+                        <?php 
+                        $moodPairs = new MoodPairs();
+                        foreach ($tests as $test): ?>
                         <tr>
                             <td class="vert-align"><?= $this->nettoyer($test->getCreatedAt()->format('Y-m-d H:i:s'))  ?></td>
                             <td class="vert-align"><?= $this->nettoyer($test->get("duree_1"))  ?></td>
                             <td class="vert-align"><?= $this->nettoyer($test->get("duree_2"))  ?></td>
                             <td class="vert-align"><?= $this->nettoyer($test->get("n_rep"))  ?></td>
+                            <td class="vert-align"><?php foreach($test->get("MoodPairs") as $moodPair) {
+                                echo $this->nettoyer($moodPairs->getAMoodPairName($moodPair)) . ", ";
+                                } 
+                                ?></td>
+                            
                             <td>
                                 <a href="Tests/modifierTests/<?= $test->getObjectId() ?>" class="btn btn-info" title="Modifier">
                                     <span class="glyphicon glyphicon-edit"></span>

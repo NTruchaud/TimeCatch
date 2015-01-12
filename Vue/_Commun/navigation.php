@@ -24,6 +24,14 @@
                         <li><a href="Tests/ajoutTest">Ajouter un tests</a></li>
                     </ul>
                 </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <span class="glyphicon glyphicon-cloud"></span> MoodPairs <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="MoodPairs/index">Consulter les mood pairs</a></li>
+                        <li><a href="MoodPairs/ajoutMoodPair">Ajouter une mood pair</a></li>
+                    </ul>
+                </li>
             </ul>
         </ul>
         <ul class="nav navbar-nav navbar-right">

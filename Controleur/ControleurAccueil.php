@@ -1,6 +1,7 @@
 <?php
 
 require_once 'ControleurPersonnalise.php';
+require_once 'ControleurSecurise.php';
 
 class ControleurAccueil extends ControleurPersonnalise {
 

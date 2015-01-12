@@ -2,7 +2,7 @@
 
 <div class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
     <!-- Lien de retour à la page d'accueil -->
-    <a class="navbar-brand" href="">GSB</a>
+    <a class="navbar-brand" href="">Time Catch</a>
 </div>
 
 <div class="container">

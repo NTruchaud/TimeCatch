@@ -1,6 +1,7 @@
 <?php
 
 require_once 'ControleurPersonnalise.php';
+require_once 'ControleurSecurise.php';
 require_once 'Modele/Tests.php';
 require_once 'Modele/MoodPairs.php';
 
@@ -17,7 +18,6 @@ class ControleurTests extends ControleurPersonnalise {
     // Affiche la page d'accueil
     public function index() {
         $tests = $this->tests->getStudy();
-
         $this->genererVue(array('tests' => $tests));
     }
 
