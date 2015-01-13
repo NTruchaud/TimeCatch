@@ -5,7 +5,7 @@
 <div class="jumbotron">
     <div class="row">
         <div class="col-md-5">
-           <!-- <img class="img-responsive" style="border-radius: 7px; border:4px solid white; box-shadow: 1px 1px 10px #555;" src="Contenu/Images/GSB.jpg" alt="Logo GSB"/> -->
+           <img class="img-responsive" src="Contenu/Images/logo_timeCatch.png" alt="Logo Time Catch"/>
         </div>
         <div class="col-md-7">
             <div class="page-header">
