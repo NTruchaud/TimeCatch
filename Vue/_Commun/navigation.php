@@ -32,6 +32,7 @@
                         <li><a href="MoodPairs/ajoutMoodPair">Ajouter une mood pair</a></li>
                     </ul>
                 </li>
+                <li><a href="Reponses/index"><span class="glyphicon glyphicon-transfer"></span> Réponses</a></li>
             </ul>
         </ul>
         <ul class="nav navbar-nav navbar-right">
