@@ -42,11 +42,14 @@ class ControleurTests extends ControleurSecurise {
             $duree_1 = $this->requete->getParametre("duree_1");
             $duree_2 = $this->requete->getParametre("duree_2");
             $n_rep = $this->requete->getParametre("n_rep");
-            $date = $this->requete->getParametre("date");
+            $dateDeb = $this->requete->getParametre("date_debut");
+            $dateFin = $this->requete->getParametre('date_fin');
+            $nbNotif = $this->requete->getParametre('nbNotif');
+            
+            $dateTimeDeb = DateTime::createFromFormat('Y-m-d', $dateDeb);
+            $dateTimeFin = DateTime::createFromFormat('Y-m-d', $dateFin);
 
-            $dateTime = DateTime::createFromFormat('Y-m-d', $date);
-
-            $test = $this->tests->modify($idTest, intval($duree_1), intval($duree_2), intval($n_rep), $dateTime);
+            $test = $this->tests->modify($idTest, intval($duree_1), intval($duree_2), intval($n_rep), $dateTimeDeb, $dateTimeFin, intval($nbNotif));
 
             $message = 'Le modification a bien été effectuée !';
             $this->genererVue(array('message' => $message));
@@ -57,10 +60,12 @@ class ControleurTests extends ControleurSecurise {
 
     public function ajouter() {
         if ($this->requete->existeParametre('duree_1') && $this->requete->existeParametre('duree_2') && $this->requete->existeParametre('n_rep') &&
-                $this->requete->existeParametre('date')) {
+                $this->requete->existeParametre('date_debut') && $this->requete->existeParametre('date_fin') && $this->requete->existeParametre('nbNotif') ) {
             $message = 'Le test d\'étude a bien été ajouté';
-            $date = $this->requete->getParametre('date');
-            $dateTime = DateTime::createFromFormat('Y-m-d', $date);
+            $dateDeb = $this->requete->getParametre('date_debut');
+            $dateFin = $this->requete->getParametre('date_fin');
+            $dateTimeDeb = DateTime::createFromFormat('Y-m-d', $dateDeb);
+            $dateTimeFin = DateTime::createFromFormat('Y-m-d', $dateFin);
 
 
             $moodPairs = $this->moodPairs->getMoodPairs();
@@ -74,7 +79,8 @@ class ControleurTests extends ControleurSecurise {
                 }
             }
 
-            $test = $this->tests->addStudy(intval($this->requete->getParametre('duree_1')), intval($this->requete->getParametre('duree_2')), intval($this->requete->getParametre('n_rep')), $dateTime, $arrayMoods);
+            $test = $this->tests->addStudy(intval($this->requete->getParametre('duree_1')), intval($this->requete->getParametre('duree_2')), 
+                    intval($this->requete->getParametre('n_rep')), $dateTimeDeb, $dateTimeFin, intval($this->requete->getParametre('nbNotif')), $arrayMoods);
         } else {
             $message = "Le test d'étude n'a pas pu être ajouté";
         }

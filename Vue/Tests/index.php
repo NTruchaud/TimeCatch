@@ -16,10 +16,12 @@ require_once 'Vue/_Commun/navigation.php';
                 <table class="table table-hover table-condensed">
                     <thead>
                         <tr>
-                            <th>Date</th>
+                            <th>Date de début</th>
+                            <th>Date de fin</th>
                             <th>Intervalle court</th>
                             <th>Intervalle long</th>
                             <th>Nombre de répétition de la procédure</th>
+                            <th>Nombre de notifications par jour</th>
                             <th>MoodPairs</th>
                             <th></th> <!-- Colonne des boutons d'action -->
                         </tr>
@@ -29,10 +31,12 @@ require_once 'Vue/_Commun/navigation.php';
                         $moodPairs = new MoodPairs();
                         foreach ($tests as $test): ?>
                         <tr>
-                            <td class="vert-align"><?= $this->nettoyer($test->getCreatedAt()->format('Y-m-d H:i:s'))  ?></td>
+                            <td class="vert-align"><?= $this->nettoyer($test->get("date_debut")->format('Y-m-d H:i:s'))  ?></td>
+                            <td class="vert-align"><?= $this->nettoyer($test->get("date_fin")->format('Y-m-d H:i:s'))  ?></td>
                             <td class="vert-align"><?= $this->nettoyer($test->get("duree_1"))  ?></td>
                             <td class="vert-align"><?= $this->nettoyer($test->get("duree_2"))  ?></td>
                             <td class="vert-align"><?= $this->nettoyer($test->get("n_rep"))  ?></td>
+                            <td class="vert-align"><?= $this->nettoyer($test->get("nbNotif"))  ?></td>
                             <td class="vert-align"><?php foreach($test->get("MoodPairs") as $moodPair) {
                                 echo $this->nettoyer($moodPairs->getAMoodPairName($moodPair)) . ", ";
                                 } 

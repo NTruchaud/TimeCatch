@@ -35,9 +35,21 @@ require_once 'Vue/_Commun/navigation.php';
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 col-sm-offset-2 control-label">Date</label>
+                        <label class="col-sm-3 col-sm-offset-2 control-label">Date de début</label>
                         <div class="col-sm-5 col-md-4">
-                            <input name="date" type="date" class="form-control" value='<?= $modifTest->get('date_debut')->format('Y-m-d') ?>' placeholder="YYYY-MM-DD" required>
+                            <input name="date_debut" type="date" class="form-control" value='<?= $modifTest->get('date_debut')->format('Y-m-d') ?>' placeholder="YYYY-MM-DD" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 col-sm-offset-2 control-label">Date de fin</label>
+                        <div class="col-sm-5 col-md-4">
+                            <input name="date_fin" type="date" class="form-control" value='<?= $modifTest->get('date_fin')->format('Y-m-d') ?>' placeholder="YYYY-MM-DD" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 col-sm-offset-2 control-label">Nombre de notifications par jour</label>
+                        <div class="col-sm-5 col-md-4">
+                            <input name="nbNotif" type="date" class="form-control" value='<?= $modifTest->get('nbNotif') ?>' required>
                         </div>
                     </div>
                     <div class="form-group">
