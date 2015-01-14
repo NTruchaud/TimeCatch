@@ -16,4 +16,11 @@ class Reponses extends Modele {
         }
         return $answers;
     }
+
+    public function getUser($idUser) {
+        $query = new Parse\ParseQuery("_User");
+        $user = $query->get($idUser);
+        return $user;
+    }
+
 }

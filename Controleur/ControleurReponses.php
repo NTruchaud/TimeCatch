@@ -22,13 +22,26 @@ class ControleurReponses extends ControleurSecurise {
         $answers = $this->reponse->getAnswers();
 
         /*
+         * Pour les données sur l'utilisateur
+         */
+        foreach ($answers as $answer) {
+            $idUser = $answer->get("idUser");
+            $users = $this->reponse->getUser($idUser);
+            $date = $users->get("ddn");
+            $age = (int)((time() - strtotime($date->format('Y-m-d'))) / 3600 / 24 / 365.242);
+            $mail = $users->get("email");
+            $sexe = $users->get("sexe");
+        }
+        
+        /*
          * Pour les mood pairs
          */
+
         foreach ($answers as $answer) {
             $moodPairsId = $answer->get("moodsId");
             foreach ($moodPairsId as $moodPairId) {
                 $aMoodPairName = $this->moodPairs->getAMoodPairName($moodPairId);
-                $moodPairs[$answer->getObjectId()] = $aMoodPairName;
+                $moodPairs[$moodPairId] = $aMoodPairName;
             }
         }
 
@@ -37,14 +50,17 @@ class ControleurReponses extends ControleurSecurise {
          */
         foreach ($answers as $answer) {
             $moodPairsValue[$answer->getObjectId()] = $answer->get("moodsValue");
+            $moodPairsHeader = $answer->get("moodsValue");
         }
-        
+
         /*
          * Pour les temps montrés
          */
         foreach ($answers as $answer) {
             $displayedDuration[$answer->getObjectId()] = $answer->get("displayedDuration");
+            $displayedDurationHeader = $answer->get("displayedDuration");
         }
+
         /*
          * Pour les estimations de temps
          */
@@ -52,9 +68,8 @@ class ControleurReponses extends ControleurSecurise {
             $estmations[$answer->getObjectId()] = $answer->get("estimatedDuration");
         }
 
-
         $this->genererVue(array('moodPairsName' => $moodPairs, 'moodPairsValue' => $moodPairsValue, 'displayed' => $displayedDuration, 'estimations' => $estmations,
-            'answers' => $answers));
+            'answers' => $answers, 'displayDurationHeader' => $displayedDurationHeader, 'moodPairsHeader' => $moodPairsHeader, 'age' => $age, 'mail' => $mail, 'sexe' => $sexe));
     }
 
 }
