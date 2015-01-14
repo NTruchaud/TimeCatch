@@ -32,7 +32,14 @@
                         <li><a href="MoodPairs/ajoutMoodPair">Ajouter une mood pair</a></li>
                     </ul>
                 </li>
-                <li><a href="Reponses/index"><span class="glyphicon glyphicon-transfer"></span> Réponses</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <span class="glyphicon glyphicon-transfer"></span> Réponses <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="Reponses/index">Consulter les réponses</a></li>
+                        <li><a href="Reponses/recherche">Rechercher un utilisateur</a></li>
+                    </ul>
+                </li>
             </ul>
         </ul>
         <ul class="nav navbar-nav navbar-right">
