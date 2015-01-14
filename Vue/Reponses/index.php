@@ -57,6 +57,7 @@ require_once 'Vue/_Commun/navigation.php';
                                 <td class="vert-align"><?= $this->nettoyer($sexe) ?></td>
                                 <td class="vert-align"><?= $this->nettoyer($answer->getCreatedAt()->format('Y-m-d H:i:s')) ?></td>
                                 <?php
+                                
                                 foreach ($moodPairsName as $key => $moodPairName):
                                     ?>
                                     <td class="vert-align"><?= $moodPairName ?></td>

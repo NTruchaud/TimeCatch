@@ -9,10 +9,10 @@ class MoodPairs extends Modele {
         try {
 
             $moodPairs = $query->find();
-            // The object was retrieved successfully.
+// The object was retrieved successfully.
         } catch (Parse\ParseExceptioneException $ex) {
-            // The object was not retrieved successfully.
-            // error is a ParseException with an error code and message.
+// The object was not retrieved successfully.
+// error is a ParseException with an error code and message.
         }
         return $moodPairs;
     }
@@ -21,7 +21,7 @@ class MoodPairs extends Modele {
         $query = new \Parse\ParseQuery("MoodPairs");
         try {
             $moodPair = $query->get($idMoodPair);
-            $moodPairName = $moodPair->get("moodPositive_fr") . "-" . $moodPair->get("moodNegative_fr");
+            $moodPairName = $moodPair->get("moodNegative_fr") . "-" . $moodPair->get("moodPositive_fr");
         } catch (\Parse\ParseException $ex) {
             
         }
@@ -44,7 +44,7 @@ class MoodPairs extends Modele {
         $moodPair = $query->get($idMoodPair);
         return $moodPair;
     }
-    
+
     public function modify($idMoodPair, $moodPositive_fr, $moodNegative_fr, $moodPositive_en, $moodNegative_en) {
         $query = new \Parse\ParseQuery('MoodPairs');
 

@@ -36,10 +36,11 @@ class ControleurReponses extends ControleurSecurise {
             /*
              * Pour les mood pairs
              */
-            $moodPairsId = $answer->get("moodsId");
-            foreach ($moodPairsId as $moodPairId) {
-                $aMoodPairName = $this->moodPairs->getAMoodPairName($moodPairId);
-                $moodPairs[$moodPairId] = $aMoodPairName;
+            $moodPairsId[] = $answer->get("moodsId");
+            foreach ($moodPairsId as $key => $moodPairId) {
+                foreach ($moodPairId as $key => $anId) {
+                    $moodPairsName[$anId] = $this->moodPairs->getAMoodPairName($anId);
+                }
             }
 
             /*
@@ -47,7 +48,6 @@ class ControleurReponses extends ControleurSecurise {
              */
             $moodPairsValue[$answer->getObjectId()] = $answer->get("moodsValue");
             $moodPairsHeader = $answer->get("moodsValue");
-
             /*
              * Pour les temps montrés
              */
@@ -59,7 +59,7 @@ class ControleurReponses extends ControleurSecurise {
              */
             $estmations[$answer->getObjectId()] = $answer->get("estimatedDuration");
         }
-        $this->genererVue(array('moodPairsName' => $moodPairs, 'moodPairsValue' => $moodPairsValue, 'displayed' => $displayedDuration, 'estimations' => $estmations,
+        $this->genererVue(array('moodPairsName' => $moodPairsName, 'moodPairsValue' => $moodPairsValue, 'displayed' => $displayedDuration, 'estimations' => $estmations,
             'answers' => $answers, 'displayDurationHeader' => $displayedDurationHeader, 'moodPairsHeader' => $moodPairsHeader, 'age' => $age, 'mail' => $mail, 'sexe' => $sexe));
     }
 
@@ -82,10 +82,11 @@ class ControleurReponses extends ControleurSecurise {
                 /*
                  * Pour les mood pairs
                  */
-                $moodPairsId = $answer->get("moodsId");
-                foreach ($moodPairsId as $moodPairId) {
-                    $aMoodPairName = $this->moodPairs->getAMoodPairName($moodPairId);
-                    $moodPairs[$moodPairId] = $aMoodPairName;
+                $moodPairsId[] = $answer->get("moodsId");
+                foreach ($moodPairsId as $key => $moodPairId) {
+                    foreach ($moodPairId as $key => $anId) {
+                        $moodPairsName[$anId] = $this->moodPairs->getAMoodPairName($anId);
+                    }
                 }
 
                 /*
@@ -104,15 +105,13 @@ class ControleurReponses extends ControleurSecurise {
                  * Pour les estimations de temps
                  */
                 $estmations[$answer->getObjectId()] = $answer->get("estimatedDuration");
-                
-                $this->genererVue(array('moodPairsName' => $moodPairs, 'moodPairsValue' => $moodPairsValue, 'displayed' => $displayedDuration, 'estimations' => $estmations,
-            'answers' => $answers, 'displayDurationHeader' => $displayedDurationHeader, 'moodPairsHeader' => $moodPairsHeader, 'age' => $age, 'mail' => $mail, 'sexe' => $sexe));
             }
+            $this->genererVue(array('moodPairsName' => $moodPairsName, 'moodPairsValue' => $moodPairsValue, 'displayed' => $displayedDuration, 'estimations' => $estmations,
+                'answers' => $answers, 'displayDurationHeader' => $displayedDurationHeader, 'moodPairsHeader' => $moodPairsHeader, 'age' => $age, 'mail' => $mail, 'sexe' => $sexe));
         } else {
             $message = "Cette utilisateur n'a pas encore effectué de tests.";
             $this->genererVue(array('message' => $message));
         }
-        
     }
 
     public function recherche() {
