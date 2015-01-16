@@ -10,6 +10,7 @@ require 'Vue/_Commun/navigation.php';
             <div class="form-group">
                 <label class="col-sm-3 col-sm-offset-2 control-label">Utilisateurs</label>
                 <div class="col-sm-5 col-md-4">
+                    <!-- Remplissage de la combobox avec les données reçus -->
                     <select class="form-control" name="id">
                         <?php foreach ($users as $user) : ?>
                             <option value="<?= $this->nettoyer($user->getObjectId()) ?>"><?= $this->nettoyer($user->get("email")) ?> 

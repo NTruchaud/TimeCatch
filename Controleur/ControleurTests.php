@@ -21,11 +21,15 @@ class ControleurTests extends ControleurSecurise {
         $this->genererVue(array('tests' => $tests));
     }
 
+    // Génération de la page d'ajout d'un test
     public function ajoutTest() {
         $moodPairs = $this->moodPairs->getMoodPairs();
         $this->genererVue(array("moodPairs" => $moodPairs));
     }
 
+    /* Génération de la page de modification d'un test avec récupération 
+     * des infos sur le test à modifier
+     */
     public function modifierTests() {
         if ($this->requete->existeParametre("id")) {
             $idTest = $this->requete->getParametre("id");
@@ -36,6 +40,9 @@ class ControleurTests extends ControleurSecurise {
         }
     }
 
+    /*
+     * Traitement de la modification, et envoie d'un message de confirmation
+     */
     public function modifier() {
         if ($this->requete->existeParametre("id")) {
             $idTest = $this->requete->getParametre("id");
@@ -45,7 +52,7 @@ class ControleurTests extends ControleurSecurise {
             $dateDeb = $this->requete->getParametre("date_debut");
             $dateFin = $this->requete->getParametre('date_fin');
             $nbNotif = $this->requete->getParametre('nbNotif');
-            
+
             $dateTimeDeb = DateTime::createFromFormat('Y-m-d', $dateDeb);
             $dateTimeFin = DateTime::createFromFormat('Y-m-d', $dateFin);
 
@@ -58,9 +65,13 @@ class ControleurTests extends ControleurSecurise {
         }
     }
 
+    
+    /*
+     * Traitement de l'ajout, et envoie d'un message de confirmation
+     */
     public function ajouter() {
         if ($this->requete->existeParametre('duree_1') && $this->requete->existeParametre('duree_2') && $this->requete->existeParametre('n_rep') &&
-                $this->requete->existeParametre('date_debut') && $this->requete->existeParametre('date_fin') && $this->requete->existeParametre('nbNotif') ) {
+                $this->requete->existeParametre('date_debut') && $this->requete->existeParametre('date_fin') && $this->requete->existeParametre('nbNotif')) {
             $message = 'Le test d\'étude a bien été ajouté';
             $dateDeb = $this->requete->getParametre('date_debut');
             $dateFin = $this->requete->getParametre('date_fin');
@@ -79,14 +90,16 @@ class ControleurTests extends ControleurSecurise {
                 }
             }
 
-            $test = $this->tests->addStudy(intval($this->requete->getParametre('duree_1')), intval($this->requete->getParametre('duree_2')), 
-                    intval($this->requete->getParametre('n_rep')), $dateTimeDeb, $dateTimeFin, intval($this->requete->getParametre('nbNotif')), $arrayMoods);
+            $test = $this->tests->addStudy(intval($this->requete->getParametre('duree_1')), intval($this->requete->getParametre('duree_2')), intval($this->requete->getParametre('n_rep')), $dateTimeDeb, $dateTimeFin, intval($this->requete->getParametre('nbNotif')), $arrayMoods);
         } else {
             $message = "Le test d'étude n'a pas pu être ajouté";
         }
         $this->genererVue(array('message' => $message, 'test' => $test));
     }
 
+    /*
+     * Traitement de la suppression, après confirmation du pop-up
+     */
     public function supprimer() {
         if ($this->requete->existeParametre("id")) {
             $idTest = $this->requete->getParametre("id");
@@ -100,34 +113,29 @@ class ControleurTests extends ControleurSecurise {
     }
 
     /*
-     * Tentative d'implémentation de l'export CSV
-     * Le problème étant que l'on va envoyer un tableau Parse, donc va savoir ce qu'il y a dedans, et donc ce qu'il va mette
-     * dans e fichier CSV.
-     * 
+     * Première tentative d'export CSV, fonctionnelle.
      */
-    
     public function exportCSV() {
         $studies = $this->tests->getStudy();
         $arrayStudies = array();
-        
+
         foreach ($studies as $study) {
-            $arrayStudies[$study->getObjectId()] = array($study->getCreatedAt()->format('Y-m-d H:i:s'), strval($study->get("duree_1")), strval($study->get("duree_2")), 
+            $arrayStudies[$study->getObjectId()] = array($study->getCreatedAt()->format('Y-m-d H:i:s'), strval($study->get("duree_1")), strval($study->get("duree_2")),
                 strval($study->get("n_rep")));
         }
         $this->array_to_csv_download($arrayStudies, $filename = "export.csv", $delimiter = ",");
     }
-    
+
     public function array_to_csv_download($array, $filename = "export.csv", $delimiter = ";") {
         // open raw memory as file so no temp files needed, you might run out of memory though
         $f = fopen('php://output', 'w');
         // loop over the input array
-        
+
         foreach ($array as $line) {
             // generate csv lines from the inner arrays
             fputcsv($f, $line, $delimiter);
         }
-        
-        
+
         // rewrind the "file" with the csv lines
         //fseek($f, 0);
         // tell the browser it's going to be a csv file

@@ -6,7 +6,6 @@ use Parse\ParseClient;
 /**
  * Contrôleur abstrait pour les vues devant afficher les infos visiteur
  * 
- * @author Baptiste Pesquet
  */
 abstract class ControleurPersonnalise extends Controleur
 {

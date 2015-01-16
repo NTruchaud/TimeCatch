@@ -19,10 +19,12 @@ class ControleurMoodPairs extends ControleurSecurise {
         $this->genererVue(array('moodPairs' => $moodPairsArray));
     }
 
+    // Génération de la page d'ajout d'une Mood Pair
     public function ajoutMoodPair() {
         $this->genererVue();
     }
 
+    // Génération de la page de modification d'une Mood Pair, avec récupération des données
     public function modifierMoodPair() {
         if ($this->requete->existeParametre("id")) {
             $idMoodPair = $this->requete->getParametre("id");
@@ -33,6 +35,7 @@ class ControleurMoodPairs extends ControleurSecurise {
         }
     }
 
+    // Traitement de la modification
     public function modifier() {
         if ($this->requete->existeParametre("id")) {
             $idMp = $this->requete->getParametre("id");
@@ -50,6 +53,7 @@ class ControleurMoodPairs extends ControleurSecurise {
         }
     }
 
+    // Traitement de l'ajout
     public function ajouter() {
         if ($this->requete->existeParametre('moodPositive_fr') && $this->requete->existeParametre('moodNegative_fr') && $this->requete->existeParametre('moodPositive_en') &&
                 $this->requete->existeParametre('moodNegative_en')) {
@@ -60,8 +64,11 @@ class ControleurMoodPairs extends ControleurSecurise {
         $this->genererVue(array('message' => $message));
     }
 
+    // Traitement de la suppression si l'utilisateur a confirmé
     public function supprimer() {
+        // Vérification de l'existance de l'ID
         if ($this->requete->existeParametre("id")) {
+            // Récupération de l'ID
             $idMp = $this->requete->getParametre("id");
             $mp = $this->moodPairs->getMoodPairs();
             $this->moodPairs->delete($idMp);

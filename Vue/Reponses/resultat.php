@@ -33,6 +33,11 @@ require_once 'Vue/_Commun/navigation.php';
                                     <th>Date complétion du test</th>
 
                                     <?php
+                                    /*
+                                     * Pour les champs Mood Pairs, Valeur des Mood Pairs, 
+                                     * Temps présentés et Temps estimés, on génère autant 
+                                     * de header qu'il y a d'élément dans le tableau envoyé
+                                     */
                                     for ($i = 1; $i <= sizeof(($moodPairsHeader)); $i++) {
                                         ?>
                                         <th>MoodPairs<?= $i ?> </th>

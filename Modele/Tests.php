@@ -4,6 +4,9 @@ require_once 'Framework/Modele.php';
 
 class Tests extends Modele {
 
+    /*
+     * Récupération de tous les tests d'étude
+     */
     public function getStudy() {
         $query = new Parse\ParseQuery("Study");
         try {
@@ -17,6 +20,9 @@ class Tests extends Modele {
         return $tests;
     }
 
+    /*
+     * Ajout d'une étude
+     */
     public function addStudy($duree_1, $duree_2, $n_rep, $dateDeb, $dateFin, $nbNotif, $arrayMoods) {
         $test = new Parse\ParseObject("Study");
 
@@ -34,6 +40,9 @@ class Tests extends Modele {
         $test->save();
     }
     
+    /*
+     * Récupération de l'étude la plus récente
+     */
     public function getMostRecentStudy() {
         $query = new Parse\ParseQuery('Test');
         $query->descending("createdAt");
@@ -41,12 +50,19 @@ class Tests extends Modele {
         return $study;
     }
     
+    /*
+     * Récupération des info d'un test d'étude afin de pouvoir l'afficher 
+     * dans la modification
+     */
     public function showModification($idTest) {
         $query = new \Parse\ParseQuery('Study');
         $test = $query->get($idTest);
         return $test;
     }
     
+    /*
+     * Traitement de la modification
+     */
     public function modify($idTest, $duree_1, $duree_2, $n_rep, $dateDeb, $dateFin, $nbNotif) {
         $query = new \Parse\ParseQuery('Study');
         
@@ -60,6 +76,9 @@ class Tests extends Modele {
         $test->save();
     }
 
+    /*
+     * Traitement de la suppression
+     */
     public function delete($idTest) {
         $query = new \Parse\ParseQuery('Study');
         

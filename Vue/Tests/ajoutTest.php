@@ -43,6 +43,7 @@ require 'Vue/_Commun/navigation.php';
                 </div>
             </div>
 
+            <!-- Ici, on génère autant de checkbox qu'il y a de moodPairs, avec comme value leurs ID respectif -->
             <div class="text-center">
                 <label class="col-sm-3 col-sm-offset-2 control-label">Mood Pairs</label><br/><br/>
                 <?php foreach ($moodPairs as $moodPair): ?>

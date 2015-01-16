@@ -45,9 +45,6 @@ require_once 'Vue/_Commun/navigation.php';
                                     <!--
                                     Dialogue modal de confirmation de suppression
                                     -->
-                                    <!--
-                                    Doit être numéroté pour être associé à chaque CR
-                                    -->
                                     <div id="dlgConfirmation<?= $moodPair->getObjectId() ?>" class="modal fade" aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1">
                                         <div class="modal-dialog">
                                             <div class="modal-content">

@@ -11,14 +11,17 @@ class ControleurConnexion extends Controleur {
 
     private $admin;
 
+    // Constructeur
     public function __construct() {
         $this->admin = new Admin();
     }
 
+    // Génération de la page de connexion
     public function index() {
         $this->genererVue();
     }
 
+    // Gestion de la connexion et enregistrement de l'utilisateur en session
     public function connecter() {
         if ($this->requete->existeParametre("login") && $this->requete->existeParametre("mdp")) {
             $login = $this->requete->getParametre("login");
@@ -33,6 +36,8 @@ class ControleurConnexion extends Controleur {
             throw new Exception("Action impossible : login ou mot de passe non défini");
     }
 
+    
+    // déconnexion de l'utilisateur, destruction de la variable de session, redirection sur l'accueil
     public function deconnecter() {
         $this->requete->getSession()->detruire();
         $this->rediriger("connexion");
