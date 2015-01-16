@@ -34,6 +34,13 @@ class Tests extends Modele {
         $test->save();
     }
     
+    public function getMostRecentStudy() {
+        $query = new Parse\ParseQuery('Test');
+        $query->descending("createdAt");
+        $study = $query->first();
+        return $study;
+    }
+    
     public function showModification($idTest) {
         $query = new \Parse\ParseQuery('Study');
         $test = $query->get($idTest);

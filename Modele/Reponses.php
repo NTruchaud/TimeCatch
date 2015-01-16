@@ -15,6 +15,13 @@ class Reponses extends Modele {
         }
         return $answers;
     }
+    
+    public function getMostRecentAnswer() {
+        $query = new \Parse\ParseQuery("Answers");
+        $query->descending("createdAt");
+        $mostRecentAnswer = $query->find();
+        return $mostRecentAnswer;
+    }
 
     public function getUser($idUser) {
         $query = new Parse\ParseQuery("_User");

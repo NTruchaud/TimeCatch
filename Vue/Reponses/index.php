@@ -14,7 +14,8 @@ require_once 'Vue/_Commun/navigation.php';
             /* if (isset($message))
               echo $this->nettoyer($message); */
             ?>
-            <h2 class="text-center">Liste de vos réponses</h2>
+            <h2 class="text-center">Liste de vos réponses</h2><br/>
+            <a class="btn btn-info" title="Exporter" href="Tests/exportCSV" type="button">Exporter</a><br/>
             <div class="table-responsive">
                 <table class="table">
                     <thead>
@@ -26,7 +27,7 @@ require_once 'Vue/_Commun/navigation.php';
                             <th>Date complétion du test</th>
 
                             <?php
-                            for ($i = 1; $i <= sizeof(($moodPairsHeader)); $i++) {                           
+                            for ($i = 1; $i <= sizeof(($moodPairsHeader)); $i++) {
                                 ?>
                                 <th>MoodPairs<?= $i ?> </th>
                             <?php } ?>
@@ -35,16 +36,16 @@ require_once 'Vue/_Commun/navigation.php';
                                 ?>
                                 <th>Valeur moodPairs <?= $i ?> </th>
                             <?php } ?>
-                                <?php
-                                for ($i = 1; $i <= sizeof(($displayDurationHeader)); $i++) {
-                                    ?>
-                                    <th>Temps affiché <?= $i ?> </th>
-                                <?php } ?>
-                                <?php
-                                for ($i = 1; $i <= sizeof(($displayDurationHeader)); $i++) {
-                                    ?>
-                                    <th>Temps estimé <?= $i ?> </th>
-                                <?php } ?>
+                            <?php
+                            for ($i = 1; $i <= sizeof(($displayDurationHeader)); $i++) {
+                                ?>
+                                <th>Temps affiché <?= $i ?> </th>
+                            <?php } ?>
+                            <?php
+                            for ($i = 1; $i <= sizeof(($displayDurationHeader)); $i++) {
+                                ?>
+                                <th>Temps estimé <?= $i ?> </th>
+                            <?php } ?>
                         </tr>
                     </thead>
                     <tbody>
@@ -52,12 +53,15 @@ require_once 'Vue/_Commun/navigation.php';
                         foreach ($answers as $answer):
                             ?>
                             <tr>
-                                <td class="vert-align"><?= $this->nettoyer($mail) ?></td>
-                                <td class="vert-align"><?= $this->nettoyer($age) ?></td>
-                                <td class="vert-align"><?= $this->nettoyer($sexe) ?></td>
+                                <?php
+                                foreach ($users[$answer->getObjectId()] as $user):
+                                    ?>
+                                    <td class="vert-align"><?= $this->nettoyer($user->get("email")) ?></td>
+                                    <td class="vert-align"><?= $this->nettoyer($user->get("ddn")->format('Y-m-d H:i:s')) ?></td>
+                                    <td class="vert-align"><?= $this->nettoyer($user->get("sexe")) ?></td>
+                                <?php endforeach; ?>
                                 <td class="vert-align"><?= $this->nettoyer($answer->getCreatedAt()->format('Y-m-d H:i:s')) ?></td>
                                 <?php
-                                
                                 foreach ($moodPairsName as $key => $moodPairName):
                                     ?>
                                     <td class="vert-align"><?= $moodPairName ?></td>

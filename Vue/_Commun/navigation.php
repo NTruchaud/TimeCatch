@@ -36,7 +36,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <span class="glyphicon glyphicon-transfer"></span> Réponses <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="Reponses/index">Consulter les réponses</a></li>
+                        <!-- <li><a href="Reponses/index">Consulter les réponses</a></li> -->
                         <li><a href="Reponses/recherche">Rechercher un utilisateur</a></li>
                     </ul>
                 </li>
